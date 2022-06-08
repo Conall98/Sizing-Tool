@@ -36,7 +36,7 @@ def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
     
     if PayloadPower < 100:
         payloadPowerFraction = 0.35
-    elif (PayloadPower > 100) & (PayloadPower < 500):
+    elif (PayloadPower >= 100) & (PayloadPower <= 500):
         payloadPowerFraction = 0.2
     elif PayloadPower > 500:
         payloadPowerFraction = 0.16
