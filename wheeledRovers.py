@@ -97,6 +97,8 @@ def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
 
 PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
 
+    
+    
 
 
 
