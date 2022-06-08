@@ -15,9 +15,12 @@ db = excel.to_numpy()
 PayloadMass = input("Estimated Payload Mass (kg): ")
 PayloadMass = float(PayloadMass)
 PayloadPower = input("Estimated Payload Power (W): ")
+PayloadPower = float(PayloadPower)
 MissionDuration = input("Expected mission duration (days): ") 
 MissionDuration = float(MissionDuration)
 Body = input("To what planetary body will the mission go to? \n - Moon \n - Mars \n ")
+
+
     
 i = 0 
 sum = 0
@@ -30,17 +33,20 @@ for line in db:
 payloadMassFraction = sum/i
 TotalMass = float(PayloadMass)/(payloadMassFraction/100)
 
-if float(PayloadPower) < 100:
+if PayloadPower < 100:
     payloadPowerFraction = 0.35
-elif float(PayloadPower) > 100 & float(PayloadPower)<500:
+elif (PayloadPower > 100) & (PayloadPower < 500):
     payloadPowerFraction = 0.2
-elif float(PayloadPower) > 500:
+elif PayloadPower > 500:
     payloadPowerFraction = 0.16
     
 TotalPower = float(PayloadPower)/payloadPowerFraction
 
     
-print("The total rover mass will be of " + str(TotalMass) + "kg.")
+print("\nThe total rover mass will be of " + str(round(TotalMass,3)) + " kg.")
+print("The total rover power will be of " + str(round(TotalPower,3)) + " W. \n")
+if TotalPower > 10000:
+    print("\nThe total power need will probably exceed 10 kW, consider AC current distribution, both sine wave and square wave, at several hundred volts. (SMAD Chapter 10.4.6)\n\n")
 
 
 if Body == "Moon":
@@ -53,7 +59,7 @@ solarPanelEfficiency = 0.12 # Standard Values go from 5%-15%
 areaSolarPanels = TotalPower / (solarPanelEfficiency * solarIrradiance)
 mPowerSolarPanels = TotalPower/PanelPowerDensity
 
-print("Area of Solar Panels is " + str(round(areaSolarPanels, 3)) + " m2")
+print("Area of Solar Panels is " + str(round(areaSolarPanels, 3)) + " m2 \n")
 print("Mass of Solar Panels is " + str(round(mPowerSolarPanels, 3)) + " kg")
 
 if Body == "Moon":
@@ -65,20 +71,24 @@ elif Body == "Mars":
     upTime = MissionDuration * 24
 
 
-batteryEnergyDensity = 140 # W.h/kg for a Li-Ion battery SMAD
-batteryCapacity = TotalPower * upTime * 0.15 # THIS 0.15 IS VERY EXPERIMENTAL AND MUST BE CONFIRMED WITH JASMINE
+batteryEnergyDensity = 140 # W.h/kg for a Li-Ion battery SMAD (for NiCd use 35-45)
+batteryCapacity = TotalPower * upTime * 0.15 # THIS 0.15 IS VERY EXPERIMENTAL AND MUST BE EXPLAINED WITH JASMINE
 mBattery = batteryCapacity/batteryEnergyDensity
 
 print("Mass of the Batteries is " + str(round(mBattery, 3)) + " kg")
 
 mPowerControlUnit = 0.02 * TotalPower  #Table 10-27 SMAD
 mRegulator = 0.025 * TotalPower  #Table 10-27 SMAD
-mWiring = 0.025 * TotalMass    # 0.01 - 0.04 Table 10-27 SMAD 
+mWiring = 0.01 * TotalMass    # 0.01 - 0.04 Table 10-27 SMAD 
+
+print("Mass of the Power Control Unit is " + str(round(mPowerControlUnit, 3)) + " kg")
+print("Mass of the Regulator is " + str(round(mRegulator, 3)) + " kg")
+print("Mass of the Wiring is " + str(round(mWiring, 3)) + " kg \n")
 
 
 mPowerSS = mPowerSolarPanels + mBattery + mPowerControlUnit + mRegulator + mWiring
 
-print("Mass of the Power SS will be " + str(round(mPowerSS, 3)) + " kg")
+print("Mass of the Power SS will be " + str(round(mPowerSS, 3)) + " kg, representing " + str(round(100*mPowerSS/TotalMass,4)) + "% of the total mass." )
 
 
 
