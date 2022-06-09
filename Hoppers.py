@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jun  6 18:24:27 2022
+Created on Thu Jun  9 10:00:29 2022
 
 @author: andre
 """
@@ -8,8 +8,6 @@ Created on Mon Jun  6 18:24:27 2022
 import numpy as np
 import pandas as pd
 
-excel = pd.read_excel (r'C:\Users\andre\Desktop\2º Semestre\(RESEARCH PROJECT)\db.xlsx')
-db = excel.to_numpy()
 
 
 PayloadMass = input("Estimated Payload Mass (kg): ")
@@ -20,21 +18,22 @@ MissionDuration = input("Expected mission duration (days): ")
 MissionDuration = float(MissionDuration)
 Body = input("To what planetary body will the mission go to? \n - Moon \n - Mars \n ")
 
+excel = pd.read_excel (r'C:\Users\andre\Desktop\2º Semestre\(RESEARCH PROJECT)\db.xlsx')
+db = excel.to_numpy()
+
+TotalMass = 1.2242 * PayloadMass + 527.67
 
 def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
 
     i = 0 
     sum = 0
     for line in db:   
-        if line[1] == "Wheeled Rover":
+        if line[1] == "Hopper":
             if line[4] != 0.0:   
                 sum = sum + line[4]
                 i = i + 1
     
-    payloadPowerFraction = 0
-    
-    payloadMassFraction = sum/i
-    TotalMass = float(PayloadMass)/(payloadMassFraction/100)
+    TotalMass = 1.2242 * PayloadMass + 527.67  # FROM NOTION, GET PAPER NAME 
     
     if PayloadPower < 100:
         payloadPowerFraction = 0.35
@@ -97,10 +96,34 @@ def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
     
     return PowerSSMasses
 
-PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
-
+def MobilitySubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
     
+    s = 1
+    T = 2
     
+    mEngine = 0.1 * s**2/TotalMass * pow(T, 2/3)
+    mTank = 2/3 * pow(PayloadMass,(2/3))   
+    
+    mMobilitySS = mEngine + mTank
+    
+    MobilitySSMasses = [mMobilitySS]
+    #NO FUEL IS CONSIDERED (DRY MASS)
 
+    return MobilitySSMasses
+
+def StructuresSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
+    #PLACEHOLDER FOR NOW
+    mStructureSS = 0.15 * TotalMass
+    
+    StructuresSSMasses = [mStructureSS]
+    
+    return StructuresSSMasses
+
+power = PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
+print(power)
+mobility = MobilitySubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
+print(mobility) 
+structures = StructuresSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
+print(structures) 
 
 

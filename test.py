@@ -6,6 +6,7 @@ Created on Wed Jun  8 20:38:35 2022
 """
 
 import wheeledRovers as wr
+import Hoppers as hp
 
-
-wr.PowerSubsystem(50, 65, 14, "Moon")
+wr.PowerSubsystem(150, 65, 14, "Moon")
+hp.StructuresSubsystem(150, 65, 14, "Mars")
