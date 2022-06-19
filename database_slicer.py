@@ -39,13 +39,13 @@ def plot(x, y, xlabel, ylabel, group):
 
 #%%
 #Plot what you want
-plot(UL["mass"][:-3], UL["dry mass"][:-3], "Wet mass (t)", "Dry mass(t)", "UL")
+#plot(UL["mass"], UL["dry mass"], "Wet mass (t)", "Dry mass(t)", "UL")
 plot(UL["mass"][:-5], UL["payload"][:-5], "Wet mass(t)", "Payload(t)", "UL")
-plot(UL["propellent"][:-3], UL["dry mass"][:-3], "Mass(t)", "Dry mass(t)", "UL")
+#plot(UL["propellent"], UL["dry mass"], "Mass(t)", "Dry mass(t)", "UL")
 
-plot(ML["mass"][:-3], ML["dry mass"][:-3], "Wet mass(t)", "Dry mass(t)", "ML")
-plot(ML["mass"][:-5], ML["payload"][:-5], "Wet mass(t)", "Payload(t)", "ML")
-plot(ML["propellent"][:-3], ML["dry mass"][:-3], "Mass(t)", "Dry mass(t)", "ML")
+#plot(ML["mass"], ML["dry mass"], "Wet mass(t)", "Dry mass(t)", "ML")
+#plot(ML["mass"], ML["payload"], "Wet mass(t)", "Payload(t)", "ML")
+#plot(ML["propellent"], ML["dry mass"], "Mass(t)", "Dry mass(t)", "ML")
 
 
 
