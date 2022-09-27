@@ -71,19 +71,19 @@ def plot(x, y, xlabel, ylabel, group):
 ##            if n[i][:5] == n[i][:5]:
 ###                plt.annotate(txt, (x[i], y[i]))
 ##                print(n[i])
-    plt.savefig(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\Results\{0}_{1}_{2}".format(group, xlabel, ylabel))
+#    plt.savefig(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\Results\{0}_{1}_{2}".format(group, xlabel, ylabel))
 
 #%%
 #Plot what you want
-plot(small["mass"].values, small["dry mass"].values, "$m_0$", "$m_f$", "small landers")
+plot(small["bloc payload"].values, small["dry mass"].values, "$m_0$", "$m_f$", "small landers")
 plot(small["bloc payload"].values, small["mass"].values, "$m_p$", "$m_0$", "small landers")
 
-plot(medium["mass"].values, medium["dry mass"].values, "$m_0$", "$m_f$", "medium landers")
-plot(medium["bloc payload"].values, medium["mass"].values, "$m_p$", "$m_0$", "medium landers")
-
-plot(large["mass"].values, large["dry mass"].values, "$m_0$", "$m_f$", "Large Landers")
-plot(large["bloc payload"].values, large["mass"].values,  "$m_p$", "$m_0$", "Large Landers")
+#plot(medium["mass"].values, medium["dry mass"].values, "$m_0$", "$m_f$", "medium landers")
+#plot(medium["bloc payload"].values, medium["mass"].values, "$m_p$", "$m_0$", "medium landers")
 #
+#plot(large["mass"].values, large["dry mass"].values, "$m_0$", "$m_f$", "Large Landers")
+#plot(large["bloc payload"].values, large["mass"].values,  "$m_p$", "$m_0$", "Large Landers")
+##
 
 #plot(ALL[""], ALL["bloc payload"], "Wet mass (t)", "Dry mass(t)", "ALL")
 #plot(UL["mass"][:-6], UL["payload"][:-6], "Wet mass(t)", "Payload(t)", "UL")
