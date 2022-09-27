@@ -1,5 +1,8 @@
 Dear reader
-This github has the sizing tool and database used to write our paper: 
+This is the sizing tool and database used in the paper: An Integrated Design Platform to Analyse and Size Planetary Exploration Systems Applied to Lunar Lava Tube Exploration
+
+It consists of a data base: DB.xlsx, and .py modules which contain functions for sizing landers and rovers and their respective subsystems
+You are free to re-use this code, just please cite our paper if you do.
 ```
 @inproceedings{depaor_roque2022sizing,
   title={An Integrated Design Platform to Analyse and Size Planetary Exploration Systems Applied to Lunar Lava Tube Exploration},
@@ -9,7 +12,5 @@ This github has the sizing tool and database used to write our paper:
   organization={International Astronautical Federation, IAF}
 }
 ```
-It was presented to the IAC in 2022
-If you use this code in your own research, please cite our paper above :)
 Thank you
 Yours truly
