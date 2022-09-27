@@ -1,8 +1,12 @@
 Dear reader
-This github has the sizing tool and database used to write our paper: An Integrated Design Platform to Analyse and Size Planetary Exploration
-Systems Applied to Lunar Lava Tube Exploration. Conall de Paor1, *, André Roque1, +, Jasmine Rimani1, 2, and Dr. Stephanie Lizy-Destrez1
-1 Institut Supérieur de l’Aéronautique et de l’Espace (ISAE-SUPAERO), Toulouse, France
-2 Politecnico di Torino, Torino, Italy
+This github has the sizing tool and database used to write our paper: 
+@inproceedings{depaor_roque2022sizing,
+  title={An Integrated Design Platform to Analyse and Size Planetary Exploration Systems Applied to Lunar Lava Tube Exploration},
+  author={de Paor, Conall and Roque, André and Rimani, Jasmine and Lizy-Destrez, St{\'e}phanie},
+  booktitle={73rd International Astronautical Congress (IAC 2022)},
+  year={2022}
+  organization={International Astronautical Federation, IAF}
+}
 
 It was presented to the IAC in 2022
 If you use this code in your own research, please cite our paper above :)
