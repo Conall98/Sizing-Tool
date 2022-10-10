@@ -12,7 +12,7 @@ excel = pd.read_excel (r'C:\Users\Conall De Paor\Desktop\Supaero\Research Projec
 db = excel.to_numpy()
 
 #%%
-def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
+def Rover_Mass(PayloadMass, PayloadPower, MissionDuration, Body):
 
     i = 0 
     sum = 0
@@ -88,23 +88,23 @@ def PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body):
     
     return TotalMass
 #%%
-#PayloadMass = input("Estimated Payload Mass (kg): ")
-#PayloadMass = float(PayloadMass)
-PayloadMass = 10    
-
-#PayloadPower = input("Estimated Payload Power (W): ")
-#PayloadPower = float(PayloadPower)
-PayloadPower = 100
-
-#MissionDuration = input("Expected mission duration (days): ") 
-#MissionDuration = float(MissionDuration)
-MissionDuration = 14
-
-#Body = input("To what planetary body will the mission go to? \n - Moon \n - Mars \n ")
-Body = "Moon"
-    
-
-RoverMass = PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
+##PayloadMass = input("Estimated Payload Mass (kg): ")
+##PayloadMass = float(PayloadMass)
+#PayloadMass = 10    
+#
+##PayloadPower = input("Estimated Payload Power (W): ")
+##PayloadPower = float(PayloadPower)
+#PayloadPower = 100
+#
+##MissionDuration = input("Expected mission duration (days): ") 
+##MissionDuration = float(MissionDuration)
+#MissionDuration = 14
+#
+##Body = input("To what planetary body will the mission go to? \n - Moon \n - Mars \n ")
+#Body = "Moon"
+#    
+#
+#RoverMass = PowerSubsystem(PayloadMass, PayloadPower, MissionDuration, Body)
 
     
     

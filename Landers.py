@@ -10,15 +10,15 @@ import numpy as np
 from sklearn.metrics import r2_score 
 #%%  Getting and classifying the landers
 
-class Lander:
-    def __init__(self,total_mass,payload_mass = None):
-        self.total_mass = total_mass
-        self.payload_mass = payload_mass
-        
-    def give_name(self,name):
-        self.name = name
-        print(f"hello, my name is {name}!")
-        return self
+#class Lander:
+#    def __init__(self,total_mass,payload_mass = None):
+#        self.total_mass = total_mass
+#        self.payload_mass = payload_mass
+#        
+#    def give_name(self,name):
+#        self.name = name
+#        print(f"hello, my name is {name}!")
+#        return self
         
         
 def get_landers():
@@ -62,6 +62,7 @@ def regression(x, y): #(bloc_payload, total_mass)
     return p
 #%% Statistical Sizing
 def Rough_Lander_Sizing(bloc_payload):
+    small_landers, medium_landers, large_landers, ALL = get_landers()
     if bloc_payload < 2000:
         lander_class = small_landers
         print("small")
@@ -72,34 +73,36 @@ def Rough_Lander_Sizing(bloc_payload):
         lander_class = large_landers
         print("large")
     p = regression(lander_class[:, 1], lander_class[:, 0])
-    a = np.round(p[0], 5)
-    b = np.round(p[1], 5)
+    a = np.round(p[1], 5)
+#    print(a)
+    b = np.round(p[0], 5)
+#    print(b)
     x = bloc_payload
     total_mass = a*x+b
     
-    print("{0}bloc_payload+{1}".format(np.round(p[1], 5), 
-                                  np.round(p[0], 5)))
+#    print("{0}bloc_payload+{1}".format(np.round(p[1], 5), 
+#                                  np.round(p[0], 5)))
     
     return total_mass
 
-if __name__ == "__main__":
-    #%% Test
-    total_mass = Rough_Lander_Sizing(5001)
-    #%% 
-        
-    small_landers, medium_landers, large_landers, ALL = get_landers()
-    
+#if __name__ == "__main__":
+#%% Test
+#total_mass = Rough_Lander_Sizing(2500)
+##%% 
+#    
+#small_landers, medium_landers, large_landers, ALL = get_landers()
+#
+##%%
+#ALL.iloc[:,2]
+#add = np.array([ALL.iloc[:,2], ALL.iloc[:,4]]).T
     #%%
-    ALL.iloc[:,2]
-    add = np.array([ALL.iloc[:,2], ALL.iloc[:,4]]).T
-    #%%
-    lander1 = Lander(1000, 12)
-    lander2 = Lander(21, 12)
-    landers = [lander1, lander2]
-    for i, lander in enumerate(landers):
-        print("weigth lander {0:d} = {1:d}".format(i, lander.total_mass))   
-        
-    lander1.give_name("Paul")
+#    lander1 = Lander(1000, 12)
+#    lander2 = Lander(21, 12)
+#    landers = [lander1, lander2]
+#    for i, lander in enumerate(landers):
+#        print("weigth lander {0:d} = {1:d}".format(i, lander.total_mass))   
+#        
+#    lander1.give_name("Paul")
 
 
 
