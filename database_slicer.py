@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score 
 #%% Database you want to plot stuff from
 
-ALL = pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB.xlsx", sheet_name = "export sheet", index_col = 0)
+ALL = pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB.xlsx", 
+                    sheet_name = "Landers", index_col = 0)
 #  
 small = []
 medium = []
@@ -75,8 +76,8 @@ def plot(x, y, xlabel, ylabel, group):
 
 #%%
 #Plot what you want
-plot(small["bloc payload"].values, small["dry mass"].values, "$m_0$", "$m_f$", "small landers")
-plot(small["bloc payload"].values, small["mass"].values, "$m_p$", "$m_0$", "small landers")
+#plot(small["bloc payload"].values, small["dry mass"].values, "$m_0$", "$m_f$", "small landers")
+#plot(small["bloc payload"].values, small["mass"].values, "$m_p$", "$m_0$", "small landers")
 
 #plot(medium["mass"].values, medium["dry mass"].values, "$m_0$", "$m_f$", "medium landers")
 #plot(medium["bloc payload"].values, medium["mass"].values, "$m_p$", "$m_0$", "medium landers")
