@@ -15,15 +15,16 @@ k = 0
 l = 0
 
 for i in range(0,len(ALL["bloc payload"])):
-    if 1 < ALL.iloc[i,6] < 2000:
+    if 1 < ALL.iloc[i,4] < 2000:
         j = j+1
         small = (ALL.iloc[2:i+1,:])
-    if 2000 < ALL.iloc[i,6] < 5000:
-        print(j)
+        #print("small")
+    if 2000 < ALL.iloc[i,4] < 5000:
+ #       print(j)
         k = k+1
         medium = (ALL.iloc[j+2-len(ALL):i+1, :])
-    if 5000 < ALL.iloc[i,6]:
-        print(k)
+    if 5000 < ALL.iloc[i,4]:
+ #       print(k)
         large = (ALL.iloc[j+k+2-len(ALL):i+1, :])
 #    
 #UL = pd.read_excel(r"DB.xlsx", sheet_name = "Science Landers",index_col = 0)
@@ -33,8 +34,8 @@ for i in range(0,len(ALL["bloc payload"])):
 
 def plot(x, y, xlabel, ylabel, group):
 #    plt.style.use("classic")
-    x = x/1000
-    y = y/1000
+    x = x
+    y = y
     plt.figure()
     plt.scatter(x, y, color = "tab:blue")
     # making the trendline
@@ -62,28 +63,27 @@ def plot(x, y, xlabel, ylabel, group):
                 "examples"], 
                 framealpha =1, prop={"size":9.5})
     plt.grid()
-    
+    plt.show()
 
-    
-#    return z
-#    if datalabels == 1:
-#        n = x.index.tolist()
-##        for i in range(0, len(n)-1):
-##            if n[i][:5] == n[i][:5]:
-###                plt.annotate(txt, (x[i], y[i]))
-##                print(n[i])
+
+    n = x.index.tolist()
+    for i in range(0, len(n)-1):
+        plt.annotate(txt, (x[i], y[i]))
+        print(n[i])
+    return z
+
 #    plt.savefig(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\Results\{0}_{1}_{2}".format(group, xlabel, ylabel))
 
 #%%
 #Plot what you want
-#plot(small["bloc payload"].values, small["dry mass"].values, "$m_0$", "$m_f$", "small landers")
-#plot(small["bloc payload"].values, small["mass"].values, "$m_p$", "$m_0$", "small landers")
+#plot(small["mass"].values, small["bloc payload"].values, "$m_0$", "$m_p$", "small landers")
+#plot(small["mass"].values, small["dry mass"].values, "$m_0$", "$m_dry$", "small landers")
 
 #plot(medium["mass"].values, medium["dry mass"].values, "$m_0$", "$m_f$", "medium landers")
 #plot(medium["bloc payload"].values, medium["mass"].values, "$m_p$", "$m_0$", "medium landers")
 #
-#plot(large["mass"].values, large["dry mass"].values, "$m_0$", "$m_f$", "Large Landers")
-#plot(large["bloc payload"].values, large["mass"].values,  "$m_p$", "$m_0$", "Large Landers")
+plot(large["dry mass"].values, large["bloc payload"].values, "$m_d$", "$m_p$", "Large Landers")
+#plot(large["dry mass"].values, large["mass"].values - large["dry mass"].values - large["bloc payload"].values,  "$m_dry$", "$m_prop$", "Large Landers")
 ##
 
 #plot(ALL[""], ALL["bloc payload"], "Wet mass (t)", "Dry mass(t)", "ALL")
@@ -97,3 +97,4 @@ def plot(x, y, xlabel, ylabel, group):
 
 
     
+# %%
