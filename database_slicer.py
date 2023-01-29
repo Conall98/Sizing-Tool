@@ -4,33 +4,20 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score 
 #%% Database you want to plot stuff from
 
-ALL = pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB.xlsx", 
-                    sheet_name = "Landers", index_col = 0)
+ALL =    pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB23.xlsx", 
+                    sheet_name = "All Landers", index_col = 0)
 #  
-small = []
-medium = []
-large = []  
-j = 0
-k = 0                      
-l = 0
+small =  pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB23.xlsx", 
+                    sheet_name = "Small", index_col = 0)
+medium = pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB23.xlsx", 
+                    sheet_name = "Medium", index_col = 0)
+large =  pd.read_excel(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\DB23.xlsx", 
+                    sheet_name = "Large (analysis)", index_col = 0)
 
-for i in range(0,len(ALL["bloc payload"])):
-    if 1 < ALL.iloc[i,4] < 2000:
-        j = j+1
-        small = (ALL.iloc[2:i+1,:])
-        #print("small")
-    if 2000 < ALL.iloc[i,4] < 5000:
- #       print(j)
-        k = k+1
-        medium = (ALL.iloc[j+2-len(ALL):i+1, :])
-    if 5000 < ALL.iloc[i,4]:
- #       print(k)
-        large = (ALL.iloc[j+k+2-len(ALL):i+1, :])
-#    
-#UL = pd.read_excel(r"DB.xlsx", sheet_name = "Science Landers",index_col = 0)
 #                               
                                
 #%% plot function
+
 
 def plot(x, y, xlabel, ylabel, group):
 #    plt.style.use("classic")
@@ -66,35 +53,45 @@ def plot(x, y, xlabel, ylabel, group):
     plt.show()
 
 
-    n = x.index.tolist()
+"""     n = x.index.tolist()
     for i in range(0, len(n)-1):
         plt.annotate(txt, (x[i], y[i]))
         print(n[i])
-    return z
+    return z """
 
 #    plt.savefig(r"C:\Users\Conall De Paor\Desktop\Supaero\Research Project\Sizing-Tool\Results\{0}_{1}_{2}".format(group, xlabel, ylabel))
+#%%
+#Ideal curve maker
+def mp_Tsky(mdry, mpl, dv, Isp):
+    mp = (mpl+mdry)*np.exp((dv)/(Isp*9.81))-(mpl+mdry)
+    return mp
+
+def mp_Tsky(mdry, mp, dv, Isp):
+    mpl = (mp+mdry)*np.exp((dv)/(Isp*9.81))-(mp+mdry)
+    return mpl
+
+def mdry_Tsky(mpl, mp, dv, Isp):
+    mdry = (mp+mpl)*np.exp((dv)/(Isp*9.81))-(mp+mpl)
+    return mdry
 
 #%%
 #Plot what you want
-#plot(small["mass"].values, small["bloc payload"].values, "$m_0$", "$m_p$", "small landers")
-#plot(small["mass"].values, small["dry mass"].values, "$m_0$", "$m_dry$", "small landers")
-
-#plot(medium["mass"].values, medium["dry mass"].values, "$m_0$", "$m_f$", "medium landers")
-#plot(medium["bloc payload"].values, medium["mass"].values, "$m_p$", "$m_0$", "medium landers")
-#
-plot(large["dry mass"].values, large["bloc payload"].values, "$m_d$", "$m_p$", "Large Landers")
-#plot(large["dry mass"].values, large["mass"].values - large["dry mass"].values - large["bloc payload"].values,  "$m_dry$", "$m_prop$", "Large Landers")
-##
-
-#plot(ALL[""], ALL["bloc payload"], "Wet mass (t)", "Dry mass(t)", "ALL")
-#plot(UL["mass"][:-6], UL["payload"][:-6], "Wet mass(t)", "Payload(t)", "UL")
-#plot(UL["propellent"], UL["dry mass"], "Propellent(t)", "Dry mass(t)", "UL")
-#
-#plot(ML["mass"], ML["dry mass"], "Wet mass(t)", "Dry mass(t)", "ML")
-#plot(ML["mass"], ML["payload"], "Wet mass(t)", "Payload(t)", "ML")
-#plot(ML["propellent"], ML["dry mass"], "Propellent(t)", "Dry mass(t)", "ML")
-
-
-
-    
-# %%
+x = small["dry mass"].values
+y = small["bloc payload (down)"].values
+xlabel = "dry mass"
+ylabel = "bloc payload"
+group = "small"
+plot(x, y, xlabel, ylabel, group) 
+#%%
+slope = 0.34828
+offset = -90.098
+y_array = []
+x_array = np.linspace(0, 2000, 2000)
+y_array = x_array*slope + offset
+varoi = np.zeros(len(x_array))
+for i in range(0,2000):
+    varoi[i] = mp_Tsky(x_array[i], y_array[i], 2250, 311)
+plt.figure()
+plt.plot(x_array, varoi)
+plt.scatter(small["dry mass"].values, small["resultant prop mass"].values)
+#%%
